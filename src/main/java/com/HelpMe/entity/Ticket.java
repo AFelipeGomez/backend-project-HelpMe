@@ -174,6 +174,7 @@ public class Ticket {
 		this.response = response;
 	}
 
+	@JsonManagedReference(value="defautComment")
 	public List<Comment> getComments() {
 		return comments;
 	}

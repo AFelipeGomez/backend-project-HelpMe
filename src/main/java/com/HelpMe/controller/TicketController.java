@@ -90,7 +90,7 @@ public class TicketController {
 
 	// 204
 	@DeleteMapping(value = "/delete/{idIncidence}")
-	public ResponseEntity<?> delete(@PathVariable Integer idTicket) throws ModelNotFoundException {
+	public ResponseEntity<?> delete(@PathVariable Integer idTicket) throws ModelNotFoundException, ConflictException {
 		System.out.print("antes de usar servixe");
 		service.delete(idTicket);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);

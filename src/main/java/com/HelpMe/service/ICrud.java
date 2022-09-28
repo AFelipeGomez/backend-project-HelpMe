@@ -25,7 +25,7 @@ public interface ICrud <T, ID> {
 
 	public void update(T t) throws ArgumentRequiredException, ModelNotFoundException, ConflictException;
 
-	public void delete(int idT) throws ModelNotFoundException;
+	public void delete(int idT) throws ModelNotFoundException, ConflictException;
 	
 
 

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ import com.HelpMe.entity.FrecuentIncidence;
 import com.HelpMe.exception.ConflictException;
 import com.HelpMe.exception.ModelNotFoundException;
 import com.HelpMe.service.IIncidenceService;
-
+@CrossOrigin("*")
 @RequestMapping("/incidence")
 @RestController
 @Validated
@@ -79,7 +80,7 @@ public class IncidenceController {
 
 	// 204
 	@DeleteMapping(value = "/delete/{idIncidence}")
-	public ResponseEntity<?> delete(@PathVariable Integer idIncidence) throws ModelNotFoundException {
+	public ResponseEntity<?> delete(@PathVariable Integer idIncidence) throws ModelNotFoundException, ConflictException {
 		System.out.print("antes de usar servixe");
 		service.delete(idIncidence);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);

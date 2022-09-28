@@ -56,7 +56,7 @@ public class StatusController {
 	}
 
 	@DeleteMapping(value = "/delete/{idStatus}")
-	public ResponseEntity<?> delete(@PathVariable Integer idStatus) throws ModelNotFoundException {
+	public ResponseEntity<?> delete(@PathVariable Integer idStatus) throws ModelNotFoundException, ConflictException {
 		service.delete(idStatus);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}

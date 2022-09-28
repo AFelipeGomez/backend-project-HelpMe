@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -147,7 +149,7 @@ public class User {
 	public void setTicketsClient(List<Ticket> ticketsClient) {
 		this.ticketsClient = ticketsClient;
 	}
-
+	@JsonIgnore
 	public List<Comment> getComments() {
 		return comments;
 	}

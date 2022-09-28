@@ -93,7 +93,7 @@ public class UserController {
 
 	// 204
 	@DeleteMapping(value = "/delete/{idUser}")
-	public ResponseEntity<?> delete(@PathVariable Integer idUser) throws ModelNotFoundException {
+	public ResponseEntity<?> delete(@PathVariable Integer idUser) throws ModelNotFoundException, ConflictException {
 		
 		service.delete(idUser);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
