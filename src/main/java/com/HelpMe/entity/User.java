@@ -124,7 +124,7 @@ public class User {
 		this.clave = clave;
 	}
 
-	@JsonBackReference
+	@JsonManagedReference
 	public Rol getRol() {
 		return rol;
 	}

@@ -27,13 +27,20 @@ public interface ITicketRepo extends JpaRepository<Ticket,Integer> {
 	
 	
 	
+	@Query(value=
+			"SELECT ticket.id,ticket.actual_date,ticket.description,ticket.observation,ticket.qualification,ticket.answer"
+			+ ",priority.name AS prioridad,status.name AS status FROM ticket "
+			+ "INNER JOIN priority "
+			+ "ON ticket.id_priority=priority.id "
+			+ "INNER JOIN status "
+			+ "ON ticket.id_status = status.id "
+			+ "where ticket.id_priority= :idPriority"
+			, nativeQuery=true) List<Object[]> ticketByPriority(@Param("idPriority") Integer idPriority);
 	
-	/*
-	 * @Query(value =
-	 * "SELECT * FROM ticket where actual_date BETWEEN = :dateInicial and :dateFinal "
-	 * ,nativeQuery = true) List<Ticket> selectTiccketDate(@Param("dateInicial")
-	 * Date dateInicial,@Param("dateFinal") Date dateFinal);
-	 */
+	
+	
+	 
+	 
 	
 	 public List<Ticket> findAllByActualDateAfterAndActualDateBefore(Date dateInicial,Date dateFinal);
 	 

@@ -106,6 +106,15 @@ public class TicketServiceImpl implements ITicketService {
 			}
 		return repo.findAllByActualDateAfterAndActualDateBefore(a, b);
 	}
+	
+	public List<Object[]> getByPriority(Integer idPriority){
+		return repo.ticketByPriority(idPriority);
+	}
+	
+	public List<Object[]> getByStatus(Integer idStatus){
+		return repo.ticketByPriority(idStatus);
+	}
+
 
 }
 

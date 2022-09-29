@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -27,10 +28,12 @@ public class Rol {
     @OneToMany(mappedBy = "rol", orphanRemoval = true, fetch = FetchType.LAZY)    
     private List<User> users;
 
-	/*
-	 * public Rol(Integer id, String nombre, List<User> users) { super(); this.id =
-	 * id; this.nombre = nombre; this.users = users; }
-	 */
+	public Rol(Integer id, String nombre, List<User> users) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.users = users;
+	}
 
 	public Rol() {
 		
@@ -51,8 +54,7 @@ public class Rol {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	@JsonManagedReference
-	@JsonIgnore
+	@JsonBackReference
 	public List<User> getUsers() {
 		return users;
 	}

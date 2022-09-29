@@ -60,6 +60,14 @@ public class TicketController {
 		return new ResponseEntity<>(listTicket, HttpStatus.OK);
 
 	}
+	
+	@GetMapping(value = "/getByPriority/{idPriority}", produces = "application/json")
+	public ResponseEntity<?> obtenerById(@PathVariable Integer idPriority) throws ModelNotFoundException, Exception {
+		List<Object[]> listTicket = service.getByPriority(idPriority);
+
+		return new ResponseEntity<>(listTicket, HttpStatus.OK);
+
+	}
 
 	/*
 	 * @GetMapping(value = "/obtenerByIdDetalle/{id}/{detalle}", produces =
