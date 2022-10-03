@@ -54,7 +54,7 @@ public class Rol {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	@JsonBackReference
+	@JsonBackReference(value="DefaultUser")
 	public List<User> getUsers() {
 		return users;
 	}

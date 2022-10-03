@@ -68,6 +68,14 @@ public class TicketController {
 		return new ResponseEntity<>(listTicket, HttpStatus.OK);
 
 	}
+	
+	@GetMapping(value = "/getByStatus/{idStatus}", produces = "application/json")
+	public ResponseEntity<?> obtenerByStatus(@PathVariable Integer idStatus) throws ModelNotFoundException, Exception {
+		List<Object[]> listTicket = service.getByStatus(idStatus);
+
+		return new ResponseEntity<>(listTicket, HttpStatus.OK);
+
+	}
 
 	/*
 	 * @GetMapping(value = "/obtenerByIdDetalle/{id}/{detalle}", produces =

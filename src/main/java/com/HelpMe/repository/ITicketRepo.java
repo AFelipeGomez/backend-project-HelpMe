@@ -36,7 +36,18 @@ public interface ITicketRepo extends JpaRepository<Ticket,Integer> {
 			+ "ON ticket.id_status = status.id "
 			+ "where ticket.id_priority= :idPriority"
 			, nativeQuery=true) List<Object[]> ticketByPriority(@Param("idPriority") Integer idPriority);
-	
+			
+			
+
+		@Query(value=
+				"SELECT ticket.id,ticket.actual_date,ticket.description,ticket.observation,ticket.qualification,ticket.answer"
+				+ ",priority.name AS prioridad,status.name AS status FROM ticket "
+				+ "INNER JOIN priority "
+				+ "ON ticket.id_priority=priority.id "
+				+ "INNER JOIN status "
+				+ "ON ticket.id_status = status.id "
+				+ "where ticket.id_status= :idStatus"
+				, nativeQuery=true) List<Object[]> ticketByStatus(@Param("idStatus") Integer idStatus);
 	
 	
 	 

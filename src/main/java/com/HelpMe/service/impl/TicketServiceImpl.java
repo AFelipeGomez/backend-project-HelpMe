@@ -112,7 +112,7 @@ public class TicketServiceImpl implements ITicketService {
 	}
 	
 	public List<Object[]> getByStatus(Integer idStatus){
-		return repo.ticketByPriority(idStatus);
+		return repo.ticketByStatus(idStatus);
 	}
 
 
