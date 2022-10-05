@@ -53,6 +53,14 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 
 	}
+	
+	@GetMapping(value = "/getByDocument/{document}", produces = "application/json")
+	public ResponseEntity<?> getByDocument(@PathVariable String document) throws ModelNotFoundException, Exception {
+		User user = service.getByDocument(document);
+
+		return new ResponseEntity<>(user, HttpStatus.OK);
+
+	}
 
 	/*
 	 * @GetMapping(value = "/obtenerByIdDetalle/{id}/{detalle}", produces =

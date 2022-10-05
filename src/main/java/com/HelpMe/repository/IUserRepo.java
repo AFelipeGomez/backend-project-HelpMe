@@ -13,5 +13,7 @@ public interface IUserRepo extends JpaRepository<User, Integer> {
 	public Boolean existsByDocument(String document);
 
 	public Boolean existsByUsername(String username);
+	
+	public User findByDocument(String document);
 
 }

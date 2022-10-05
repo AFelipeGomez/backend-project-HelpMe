@@ -89,6 +89,14 @@ public class UserServiceImpl implements IUserService {
 		return repo.existsById(idUser);
 	}
 
-	
+	public User getByDocument(String document) throws ModelNotFoundException {
+		
+		if(!repo.existsByDocument(document)) {
+			throw new ModelNotFoundException("Usuario no encontrado");
+		}
+
+		return repo.findByDocument(document);
+
+	}
 
 }
