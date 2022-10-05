@@ -9,4 +9,7 @@ import com.HelpMe.exception.ModelNotFoundException;
 public interface IUserService extends ICrud<User, Integer>{
 
 	 public User getByDocument(String document) throws ModelNotFoundException;
+	 
+	 
+	 public void deleteByDocument(String document) throws ModelNotFoundException ;
 }

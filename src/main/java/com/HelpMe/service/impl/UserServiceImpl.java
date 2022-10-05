@@ -83,6 +83,16 @@ public class UserServiceImpl implements IUserService {
 			throw new ModelNotFoundException("Usuario no encontrado");
 		}
 	}
+	
+	public void deleteByDocument(String document) throws ModelNotFoundException {
+
+		if (repo.existsByDocument(document)) {
+			System.out.print("Valido y id si existe");
+			this.repo.deleteByDocument(document);
+		} else {
+			throw new ModelNotFoundException("Usuario no encontrado");
+		}
+	}
 
 	private Boolean validarExistenciaPorId(int idUser) {
 

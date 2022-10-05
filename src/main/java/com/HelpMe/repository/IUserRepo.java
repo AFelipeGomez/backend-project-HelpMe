@@ -1,5 +1,7 @@
 package com.HelpMe.repository;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +18,6 @@ public interface IUserRepo extends JpaRepository<User, Integer> {
 	
 	public User findByDocument(String document);
 
+	@Transactional
+	public void deleteByDocument(String document);
 }

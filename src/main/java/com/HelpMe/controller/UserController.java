@@ -106,4 +106,12 @@ public class UserController {
 		service.delete(idUser);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
+	
+	// 204
+	@DeleteMapping(value = "/deleteByDocument/{document}")
+	public ResponseEntity<?> deleteByDocument(@PathVariable String document) throws ModelNotFoundException, ConflictException {
+		
+		service.deleteByDocument(document);
+		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+	}
 }
