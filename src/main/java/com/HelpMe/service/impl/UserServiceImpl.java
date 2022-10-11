@@ -1,24 +1,45 @@
 package com.HelpMe.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.HelpMe.entity.User;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
 import com.HelpMe.exception.ArgumentRequiredException;
 import com.HelpMe.exception.ConflictException;
 import com.HelpMe.exception.ModelNotFoundException;
 import com.HelpMe.repository.IUserRepo;
 import com.HelpMe.service.IUserService;
+import com.HelpMe.entity.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+
 
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService, UserDetailsService {
 
 	@Autowired
 	private IUserRepo repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
 	
 	@Override
 	public List<User> getAll() {
@@ -56,6 +77,9 @@ public class UserServiceImpl implements IUserService {
 		if (repo.existsByUsername(user.getUsername())) {
 			throw new ConflictException("UserName ya existe");
 		}
+		
+		user.setClave(bcrypt.encode(user.getClave()));
+		
 		this.repo.save(user);
 
 	}
@@ -99,6 +123,8 @@ public class UserServiceImpl implements IUserService {
 		return repo.existsById(idUser);
 	}
 
+	
+	
 	public User getByDocument(String document) throws ModelNotFoundException {
 		
 		if(!repo.existsByDocument(document)) {
@@ -107,6 +133,27 @@ public class UserServiceImpl implements IUserService {
 
 		return repo.findByDocument(document);
 
+	}
+	
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		System.out.print("Entro logueo");		
+		
+	
+		User usuario = repo.findOneByEmail(email);
+		
+		
+		System.out.print("User:"+"hola"+usuario.getRol().getNombre());
+		
+		if(usuario == null)
+			new UsernameNotFoundException("----Usuario no encontrado");
+		
+		List<GrantedAuthority> roles = new ArrayList<>();
+		roles.add(new SimpleGrantedAuthority(usuario.getRol().getNombre()));
+		
+      
+        UserDetails uds = new org.springframework.security.core.userdetails.User(usuario.getEmail(), usuario.getClave(), roles);
+        return uds;
 	}
 
 }

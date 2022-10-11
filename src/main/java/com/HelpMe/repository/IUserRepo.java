@@ -20,4 +20,6 @@ public interface IUserRepo extends JpaRepository<User, Integer> {
 
 	@Transactional
 	public void deleteByDocument(String document);
+	
+	User findOneByEmail(String email);
 }
