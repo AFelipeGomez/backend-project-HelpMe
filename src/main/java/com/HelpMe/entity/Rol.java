@@ -11,22 +11,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
 @Table(name = "rol")
 public class Rol {
-	@Id    
-    private Integer id;
-    
-    @Column(name = "nombre", nullable = false, length = 25)
-    private String nombre;        
-   
-    
-    @OneToMany(mappedBy = "rol", orphanRemoval = true, fetch = FetchType.LAZY)    
-    private List<User> users;
+	@Id
+	private Integer id;
+
+	@Column(name = "nombre", nullable = false, length = 25)
+	private String nombre;
+
+	@OneToMany(mappedBy = "rol", orphanRemoval = true, fetch = FetchType.LAZY)
+	private List<User> users;
 
 	public Rol(Integer id, String nombre, List<User> users) {
 		super();
@@ -36,7 +33,7 @@ public class Rol {
 	}
 
 	public Rol() {
-		
+
 	}
 
 	public Integer getId() {
@@ -54,7 +51,8 @@ public class Rol {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	@JsonBackReference(value="DefaultUser")
+
+	@JsonBackReference(value = "DefaultUser")
 	public List<User> getUsers() {
 		return users;
 	}
@@ -63,7 +61,4 @@ public class Rol {
 		this.users = users;
 	}
 
-	
-    
-    
 }

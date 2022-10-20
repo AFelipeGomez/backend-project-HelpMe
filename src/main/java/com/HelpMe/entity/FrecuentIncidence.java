@@ -23,9 +23,9 @@ public class FrecuentIncidence {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="dateActual", nullable=false)
-	private Date dateActual;	
+
+	@Column(name = "dateActual", nullable = false)
+	private Date dateActual;
 
 	@Column(name = "title", nullable = false, length = 250)
 	private String title;
@@ -35,20 +35,18 @@ public class FrecuentIncidence {
 
 	@Column(name = "answer", nullable = false, length = 500)
 	private String answer;
-	
+
 	@Column(name = "file", nullable = false, length = 250)
 	private String file;
-	
-	@ManyToOne
-    @JoinColumn(name = "id_users")
-    private User user;
-	
-	@OneToMany(mappedBy = "frecuentIncidence", orphanRemoval = true, cascade = CascadeType.ALL)    
-    private List<KeyWords> keyWords;
-	
 
-	
-	//@JsonManagedReference(value = "defaultUser")
+	@ManyToOne
+	@JoinColumn(name = "id_users")
+	private User user;
+
+	@OneToMany(mappedBy = "frecuentIncidence", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<KeyWords> keyWords;
+
+	// @JsonManagedReference(value = "defaultUser")
 	public User getUser() {
 		return user;
 	}
@@ -131,9 +129,4 @@ public class FrecuentIncidence {
 		this.file = file;
 	}
 
-	
-
-	
-	 
-	
 }

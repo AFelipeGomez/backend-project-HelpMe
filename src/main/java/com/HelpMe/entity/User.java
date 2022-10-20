@@ -16,57 +16,56 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 @Entity
 @Table(name = "users")
 public class User {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Column(name = "name", nullable = false, length = 25)
-    private String name;
+	@Column(name = "name", nullable = false, length = 25)
+	private String name;
 
-    @Column(name = "document", nullable = false, length = 25)
-    private String document;
+	@Column(name = "document", nullable = false, length = 25)
+	private String document;
 
- 
-    @Column(name = "email", nullable = false, length = 60)
-    private String email;
+	@Column(name = "email", nullable = false, length = 60)
+	private String email;
 
-    @Column(name = "phone", nullable = false, length = 60)
-    private String phone;
+	@Column(name = "phone", nullable = false, length = 60)
+	private String phone;
 
-    @Column(name = "username", nullable = false, length = 60)
-    private String username;
+	@Column(name = "username", nullable = false, length = 60)
+	private String username;
 
-    @Column(name = "clave", nullable = false, length = 60)
-    private String clave;
-
-    @ManyToOne
-    @JoinColumn(name = "id_rol" , foreignKey = @ForeignKey(name = "FK_rol"))
-    private Rol rol;
-    
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)    
-    private List<FrecuentIncidence> frecuenceincidents;
-    
-    @OneToMany(mappedBy = "userClient", fetch = FetchType.LAZY)    
-    private List<Ticket> ticketsClient;
-    
-    @OneToMany(mappedBy = "user",  fetch = FetchType.LAZY)    
-    private List<Comment> comments;
-    
-    @OneToMany(mappedBy = "user",  fetch = FetchType.LAZY)    
-    private List<Response> responses;
-
+	@Column(name = "clave", nullable = false, length = 60)
+	private String clave;
 	
-	public User() {
-		
-	}
+	@Column(name = "validate_Sesion", nullable = true)
+	private Boolean validateSesion;
 
+	@ManyToOne
+	@JoinColumn(name = "id_rol", foreignKey = @ForeignKey(name = "FK_rol"))
+	private Rol rol;
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<FrecuentIncidence> frecuenceincidents;
+
+	@OneToMany(mappedBy = "userClient", fetch = FetchType.LAZY)
+	private List<Ticket> ticketsClient;
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Comment> comments;
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Response> responses;
+
+	public User() {
+
+	}
+	
 
 	public Integer getId() {
 		return id;
@@ -124,7 +123,7 @@ public class User {
 		this.clave = clave;
 	}
 
-	//@JsonManagedReference(value="DefaultUser")
+	// @JsonManagedReference(value="DefaultUser")
 	public Rol getRol() {
 		return rol;
 	}
@@ -132,6 +131,7 @@ public class User {
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
+
 	@JsonBackReference(value = "defaultUser")
 	public List<FrecuentIncidence> getFrecuenceincidents() {
 		return frecuenceincidents;
@@ -141,7 +141,7 @@ public class User {
 		this.frecuenceincidents = frecuenceincidents;
 	}
 
-	@JsonBackReference(value="defailtClient")
+	@JsonBackReference(value = "defailtClient")
 	public List<Ticket> getTicketsClient() {
 		return ticketsClient;
 	}
@@ -149,6 +149,7 @@ public class User {
 	public void setTicketsClient(List<Ticket> ticketsClient) {
 		this.ticketsClient = ticketsClient;
 	}
+
 	@JsonIgnore
 	public List<Comment> getComments() {
 		return comments;
@@ -165,6 +166,17 @@ public class User {
 	public void setResponses(List<Response> responses) {
 		this.responses = responses;
 	}
-    
-    
+
+
+	public Boolean getValidateSesion() {
+		return validateSesion;
+	}
+
+
+	public void setValidateSesion(Boolean validateSesion) {
+		this.validateSesion = validateSesion;
+	}
+	
+	
+
 }

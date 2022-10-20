@@ -27,7 +27,7 @@ import com.HelpMe.exception.ConflictException;
 import com.HelpMe.exception.ModelNotFoundException;
 import com.HelpMe.service.IUserService;
 @CrossOrigin("*")
-@PreAuthorize("hasAuthority('Administ')")
+//@PreAuthorize("hasAuthority('Administ')")
 @RequestMapping("/user")
 @RestController
 @Validated

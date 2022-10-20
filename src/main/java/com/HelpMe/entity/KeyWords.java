@@ -12,21 +12,19 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="key_words")
+@Table(name = "key_words")
 public class KeyWords {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; 
-	
-	@Column(name="word",nullable = false, length = 50)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	@Column(name = "word", nullable = false, length = 50)
 	private String word;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "id_frecuent_incidence")
+	@JoinColumn(name = "id_frecuent_incidence")
 	private FrecuentIncidence frecuentIncidence;
-	
-	
 
 	public KeyWords() {
 		super();
@@ -63,6 +61,5 @@ public class KeyWords {
 	public void setFrecuentIncidence(FrecuentIncidence frecuentIncidence) {
 		this.frecuentIncidence = frecuentIncidence;
 	}
-	
-	
+
 }

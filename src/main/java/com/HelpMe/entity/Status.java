@@ -14,19 +14,19 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="status")
+@Table(name = "status")
 
 public class Status {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="name", nullable=false,length=50)
+
+	@Column(name = "name", nullable = false, length = 50)
 	private String name;
-	
-	@OneToMany(mappedBy = "status", fetch = FetchType.LAZY)    
-    private List<Ticket> tickets;
+
+	@OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
+	private List<Ticket> tickets;
 
 	public Status(Integer id, String name, List<Ticket> tickets) {
 		super();
@@ -55,7 +55,7 @@ public class Status {
 		this.name = name;
 	}
 
-	@JsonBackReference(value="defaultStatus")
+	@JsonBackReference(value = "defaultStatus")
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
@@ -63,7 +63,5 @@ public class Status {
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
-	
-	
-	
+
 }

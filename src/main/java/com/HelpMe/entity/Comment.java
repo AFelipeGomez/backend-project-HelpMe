@@ -10,32 +10,30 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="comment")
+@Table(name = "comment")
 
 public class Comment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "description", nullable = false, length = 250)
 	private String description;
-	
-	@Column(name="actual_date", nullable=false)
+
+	@Column(name = "actual_date", nullable = false)
 	private Date actualDate;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "id_ticket")
-    private Ticket ticket;
-	
+	@JoinColumn(name = "id_ticket")
+	private Ticket ticket;
+
 	@ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
+	@JoinColumn(name = "id_user")
+	private User user;
 
 	public Comment(Integer id, String description, Date actualDate, Ticket ticket, User user) {
 		super();
@@ -73,8 +71,8 @@ public class Comment {
 	public void setActualDate(Date actualDate) {
 		this.actualDate = actualDate;
 	}
-	
-	@JsonBackReference(value="defautComment")
+
+	@JsonBackReference(value = "defautComment")
 	public Ticket getTicket() {
 		return ticket;
 	}
@@ -82,8 +80,8 @@ public class Comment {
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
 	}
-	
-	@JsonBackReference(value="CommentUser")
+
+	@JsonBackReference(value = "CommentUser")
 	public User getUser() {
 		return user;
 	}
@@ -91,7 +89,5 @@ public class Comment {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
+
 }

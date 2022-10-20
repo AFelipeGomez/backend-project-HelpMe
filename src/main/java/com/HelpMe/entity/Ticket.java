@@ -3,7 +3,7 @@ package com.HelpMe.entity;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,14 +42,12 @@ public class Ticket {
 	@Column(name = "qualification", nullable = true)
 	private int qualification;
 
-	
-
 	@ManyToOne
-	@JoinColumn(name = "id_status",foreignKey = @ForeignKey(name = "FK_status"))
+	@JoinColumn(name = "id_status", foreignKey = @ForeignKey(name = "FK_status"))
 	private Status status;
 
 	@ManyToOne
-	@JoinColumn(name = "id_priority",foreignKey = @ForeignKey(name = "FK_priority"))
+	@JoinColumn(name = "id_priority", foreignKey = @ForeignKey(name = "FK_priority"))
 	private Priority priority;
 
 	@ManyToOne
@@ -59,17 +57,11 @@ public class Ticket {
 	@OneToOne(mappedBy = "ticket")
 	private Response response;
 
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name="id_support") private User userSupport;
-	 */
-
-	@OneToMany(mappedBy = "ticket",  fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "ticket", fetch = FetchType.LAZY)
 	private List<Comment> comments;
 
 	public Ticket(Integer id, Date actualDate, String description, String observation, String answer, int qualification,
-			 Status status, Priority priority, User userClient, Response response, List<Comment> comments) {
+			Status status, Priority priority, User userClient, Response response, List<Comment> comments) {
 		super();
 		this.id = id;
 		this.actualDate = actualDate;
@@ -77,7 +69,6 @@ public class Ticket {
 		this.observation = observation;
 		this.answer = answer;
 		this.qualification = qualification;
-		
 		this.status = status;
 		this.priority = priority;
 		this.userClient = userClient;
@@ -137,9 +128,7 @@ public class Ticket {
 		this.qualification = qualification;
 	}
 
-	
-
-	//@JsonManagedReference(value="defaultStatus")
+	// @JsonManagedReference(value="defaultStatus")
 	public Status getStatus() {
 		return status;
 	}
@@ -148,7 +137,7 @@ public class Ticket {
 		this.status = status;
 	}
 
-	//@JsonManagedReference(value="defautPriority")
+	// @JsonManagedReference(value="defautPriority")
 	public Priority getPriority() {
 		return priority;
 	}
@@ -157,7 +146,7 @@ public class Ticket {
 		this.priority = priority;
 	}
 
-	//@JsonManagedReference(value="defaultClient")
+	// @JsonManagedReference(value="defaultClient")
 	public User getUserClient() {
 		return userClient;
 	}
@@ -174,7 +163,7 @@ public class Ticket {
 		this.response = response;
 	}
 
-	@JsonManagedReference(value="defautComment")
+	@JsonManagedReference(value = "defautComment")
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -183,5 +172,4 @@ public class Ticket {
 		this.comments = comments;
 	}
 
-	
 }

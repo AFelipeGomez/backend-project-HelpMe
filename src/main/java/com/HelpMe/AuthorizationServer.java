@@ -10,9 +10,13 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableAuthorizationServer
@@ -50,7 +54,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter{
 	private BCryptPasswordEncoder bcrypt;	
 	
 	//GranType es con password para generar valores de acceso
-	//Tiempo de vida del token acitvo
+	//Tiempo de vida del token activo
 	@Override
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
 		configurer.inMemory().withClient(clientId).secret(bcrypt.encode(clientSecret)).authorizedGrantTypes(grantType)
@@ -65,5 +69,20 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter{
 		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
 		endpoints.tokenStore(tokenStore).accessTokenConverter(accessTokenConverter).tokenEnhancer(enhancerChain).authenticationManager(authenticationManager);
 	}
+	//Permite configurar el Cors para el controaldor de oauth token
+	 @Override
+	    public void configure(AuthorizationServerSecurityConfigurer security) {
+	        
+
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        CorsConfiguration config = new CorsConfiguration();
+	        config.applyPermitDefaultValues();
+
+	        source.registerCorsConfiguration("/oauth/token", config);
+	        CorsFilter filter = new CorsFilter(source);
+	        security.addTokenEndpointAuthenticationFilter(filter);
+	    }
+	 
+	
 	
 }
